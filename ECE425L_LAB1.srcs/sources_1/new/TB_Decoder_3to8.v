@@ -24,14 +24,14 @@ module TB_Decoder_3to8();
 
     // instantiate decoder module
     //                                               Enable,Input(3b),Output(8b)                
-    module Decoder_3to8         DECODER1            (E     ,X        ,Z);
+    Decoder_3to8         DECODER1            (E     ,X        ,Z);
 
     
     //Behavioral code block generates stimulus to test circuit
     initial 
          begin
             // Enable zero, output should be zero
-            E = 1'b0; X = 3'b111
+            E = 1'b0; X = 3'b111;
             #50;
             //*********************//
             // Enable 1
