@@ -7,10 +7,34 @@
 //          decoder includeing ENABLE signals. Develop a testbench, perofrm a waveform
 //          simulation, and demonstrate the output to the Instructor.
 
+// Variables:
+//          E : Enable Input
+//          S : Selecting Input
+//          X1 X0 : X0 is first 16-bit input
+//                  X1 is second 16bit input
+//          Z : 16-bit selected output
+
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Mux16bit_2to1(
-
-    );
+module Mux16bit_2to1(E, S, X1, X0, Z);
+    input E, S;
+    input [15:0] X1;
+    input [15:0] X0;
+    output [15:0] Z;
+    // INtermediate gate outputs     
+    wire Snot; 
+    wire [15:0] A1;
+    wire [15:0] A2; 
+    
+    // Structural model for 2-to-1 MUX
+    // Intermediate gates
+    not         n1(Snot,S);
+    and a1[15:0]  (A1,E,S,X1);
+    and a2[15:0]  (A2,E,Snot,X0);
+    // Output
+    or  o1[15:0]  (Z, A1, A2);
+    
+    
+    
 endmodule
