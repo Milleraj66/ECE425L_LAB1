@@ -36,7 +36,6 @@
 
 //              The enable paramater needs to have logic setup
 
-//              Need to fix so only one "Out" rather than four
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -47,19 +46,26 @@ module ShiftReg(Clk  , E     , H   , Funct   , In       , Out);
     output Out;
     // Enable or disable shift reg modules depending on function selected
     wire [7:0] EF;
+    // Function output must be muxed to the proper output 
+    wire [7:0] FO;
     
+    // Decoder used to select the function module 
     //                                       Enable,Input(3b)    ,Output(8b)                
     Decoder_3to8                D1          (E     ,Funct        ,EF);
     
     // Instantiation of the 4 function modules
     //                                      Clock, Enable, DataIn, DataOut
-    ShiftRight_4BitSerial       SR1         (Clk  ,EF[0] , In   , Out);
+    ShiftRight_4BitSerial       SR1         (Clk  ,EF[0] , In   , FO[0]);
     //                                      Clock, Enable, DataIn, DataOut
-    ShiftLeft_4BitSerial        SL1         (Clk  ,EF[1] , In   , Out);
+    ShiftLeft_4BitSerial        SL1         (Clk  ,EF[1] , In   , FO[1]);
     //                                       Clock, Enable, DataOut
-    ShiftRightIn_4BitSerial     SRI1        (Clk  ,EF[2]  , Out);
+    ShiftRightIn_4BitSerial     SRI1        (Clk  ,EF[2]  , FO[2]);
     //                                       Clock, Enable, DataOut
-    ShiftLeftIn_4BitSerial      SLI1        (Clk  ,EF[3]  , Out);
+    ShiftLeftIn_4BitSerial      SLI1        (Clk  ,EF[3]  , FO[3]);
+    
+    // Mux will select the FO (function output) coorisponding to the Funct used
+    //                                       Enable,Select(3bit),Input(8b),Output
+    Mux1bit_8to1                MUX1        (E     , S          , FO      , Out);
     
     
     
