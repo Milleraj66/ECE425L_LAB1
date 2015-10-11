@@ -16,8 +16,8 @@
 
 //////////////////////////////////////////////////////////////////////////////////
 
-
-module Mux16bit_2to1(E, S, X1, X0, Z);
+//                   Enable,Select,Input1,Input2,Output
+module Mux16bit_2to1(E     ,   S  , X1   , X0   , Z);
     input E, S;
     input [15:0] X1;
     input [15:0] X0;
