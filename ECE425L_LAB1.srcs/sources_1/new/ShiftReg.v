@@ -36,6 +36,8 @@
 
 //              The enable paramater needs to have logic setup
 
+// Sources: http://www.electronics-tutorials.ws/sequential/seq_5.html 
+//          http://stackoverflow.com/questions/22183234/shift-register-design-using-structural-verilog 
 
 //////////////////////////////////////////////////////////////////////////////////
 
